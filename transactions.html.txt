@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .transaction {
+            padding: 10px;
+            margin: 5px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .back-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            text-align: center;
+            background-color: #333;
+            color: #fff;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="accountTitle">Transactions</h1>
+        <div id="transactionsList"></div>
+        <a href="index.html" class="back-btn">Back</a>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const account = urlParams.get('account');
+
+        const transactionsList = document.getElementById('transactionsList');
+        const accountTitle = document.getElementById('accountTitle');
+        accountTitle.textContent = account + ' Transactions';
+
+        let transactions = [];
+
+        if(account === 'Emergency') {
+            transactions = [
+                { date: '25 Nov 2025', amount: 'R358.21' }
+            ];
+        } else if(account === 'Lerato Jafta Tsiu') {
+            transactions = [];
+            const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov'];
+            months.forEach(month => {
+                transactions.push({ date: '25 ' + month + ' 2025', amount: 'R100' });
+            });
+        }
+
+        transactions.forEach(t => {
+            const div = document.createElement('div');
+            div.className = 'transaction';
+            div.textContent = `${t.date} - ${t.amount}`;
+            transactionsList.appendChild(div);
+        });
+    </script>
+</body>
+</html>
